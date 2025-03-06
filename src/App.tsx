@@ -1,16 +1,23 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import AboutProduct from "./pages/AboutProduct";
 import LayoutMain from "./layout/LayoutMain";
+
+import LayoutProduct from "./layout/LayoutProduct";
+import IndexPage from "./pages/IndexPage";
+import AboutProductPage from "./pages/AboutProductPage";
+
+import { ProductsProvider } from "./context/ProductsContext";
 
 export default function App() {
   return (
-    <Routes>
-      <Route element={<LayoutMain />}>
-        <Route element={<Home />} path="/"></Route>
-        <Route element={<AboutProduct />} path="/about"></Route>
-
-      </Route>
-    </Routes>
+    <ProductsProvider>
+      <Routes>
+        <Route element={<LayoutMain />}>
+          <Route element={<IndexPage />} path="/" />
+        </Route>
+        <Route element={<LayoutProduct />}>
+          <Route element={<AboutProductPage />} path="/about/:id" />
+        </Route>
+      </Routes>
+    </ProductsProvider>
   );
 }
