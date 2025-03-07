@@ -15,7 +15,7 @@ export default function ProductCard({ image }: any) {
     >
       <NavLink to={`/about/${image.id}`}>
         <motion.img
-          src={image.src}
+          src={image.profilePicture}
           alt={`Project ${image.id}`}
           className="rounded-3xl w-[38vh] h-[38vh] object-cover transition-transform duration-500 ease-in-out transform hover:translate-x-8 hover:z-10 hover:relative"
           layout
