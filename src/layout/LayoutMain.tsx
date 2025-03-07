@@ -12,7 +12,7 @@ export default function LayaoutMain() {
         <Outlet />
       </main>
 
-      <footer className="h-[15vh]">
+      <footer>
         <BarMenu />
       </footer>
     </div>

@@ -23,6 +23,7 @@ body {
 /* Personaliza la barra de desplazamiento en navegadores Webkit */
 .stylish-scroll::-webkit-scrollbar {
   width: 10px;
+  height: 8px;
 }
 
 /* Estilo del "thumb" (la parte que se mueve) */

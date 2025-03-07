@@ -4,9 +4,11 @@ export const BarMenu = () => {
   const { selectedItem, setSelectedItem } = useProduct();
 
   return (
-    <div className="ml-[2vh] sm:ml-[15vh] gap-5">
-      <h1 className="text-5xl font-semibold">{selectedItem}</h1>{" "}
-      <div className="flex gap-5 mt-4">
+    <div className="ml-[4vh] sm:ml-[15vh] mb-5">
+      
+      <h1 className="text-3xl sm:text-5xl font-semibold">{selectedItem}</h1>{" "}
+      
+      <div className="flex gap-5 mt-2">
         <button
           className="hover:underline"
           onClick={() => setSelectedItem("Todo")}
