@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 export default function LayoutProduct() {
   return (
-    <div className="flex flex-col h-screen bg-[hsl(0,0%,90%)]">
+    <div className="flex flex-col min-h-screen bg-[hsl(0,0%,90%)]">
 
       <Header />
       
