@@ -1,87 +1,142 @@
 import {
-    createContext,
-    useContext,
-    ReactNode,
-    useState,
-    useEffect,
-  } from "react";
-  import { images } from "../data/imagenes.ts";
-  
-  type ProductsContextType = {
-    selectedItem: string;
-    setSelectedItem: (item: string) => void;
-    filteredImages: typeof images;
-    rows: (typeof images)[];
-    isTransitioning: boolean;
-    searchInformation: (id: number) => typeof images[number][];
-  };
-  
-  const ProductsContext = createContext<ProductsContextType | undefined>(
-    undefined
+  createContext,
+  useContext,
+  ReactNode,
+  useState,
+  useEffect,
+} from "react";
+import { productType, productPictureType } from "../types/index.ts";
+import { supabase } from "../supabaseClient";
+
+type ProductsContextType = {
+  selectedItem: string;
+  setSelectedItem: (item: string) => void;
+  filteredImages: productType[];
+  rows: productType[][];
+  isTransitioning: boolean;
+  selectedProduct: productType | null;
+  productPictures: productPictureType[];
+  fetchProductData: (id: number) => Promise<void>;
+};
+
+const ProductsContext = createContext<ProductsContextType | undefined>(
+  undefined
+);
+
+export const ProductsProvider = ({ children }: { children: ReactNode }) => {
+  const [selectedItem, setSelectedItem] = useState("Todo");
+  const [products, setProducts] = useState<productType[]>([]);
+  const [filteredImages, setFilteredImages] = useState<productType[]>([]);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [rows, setRows] = useState<productType[][]>([]);
+
+  const [selectedProduct, setSelectedProduct] = useState<productType | null>(
+    null
   );
-  
-  export const ProductsProvider = ({ children }: { children: ReactNode }) => {
-    const [selectedItem, setSelectedItem] = useState("Todo");
-    const [filteredImages, setFilteredImages] = useState(images);
-    const [isTransitioning, setIsTransitioning] = useState(false);
-    const [rows, setRows] = useState<(typeof images)[]>([]);
-  
-    // Filter images & set transition
-    useEffect(() => {
-      setIsTransitioning(true);
-  
-      const newImages =
+  const [productPictures, setProductPictures] = useState<productPictureType[]>(
+    []
+  );
+
+  // Obtener lista de productos desde Supabase
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data, error } = await supabase
+        .from("Products")
+        .select(
+          "id, name, purpose, material, dimensions, description, recommendations, profilePicture, category"
+        );
+
+      if (error) {
+        console.error("Error fetching products:", error);
+      } else {
+        setProducts(data);
+        setFilteredImages(data);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  // Filtrar productos según categoría seleccionada
+  useEffect(() => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setFilteredImages(
         selectedItem === "Todo"
-          ? images
-          : images.filter((image) => image.category === selectedItem);
-  
-      setFilteredImages(newImages);
-  
+          ? products
+          : products.filter((product) => product.category === selectedItem)
+      );
       setIsTransitioning(false);
-    }, [selectedItem]);
-  
-    // Number of rows
-    useEffect(() => {
-      const newRows = [
-        filteredImages.slice(0, Math.ceil(filteredImages.length / 2)),
-  
-        filteredImages.slice(
-          Math.ceil(filteredImages.length / 2),
-          Math.ceil(filteredImages.length / 2) * 2
-        ),
-  
-        filteredImages.slice(Math.ceil(filteredImages.length / 2) * 2),
-      ];
-  
-      setRows(newRows);
-    }, [filteredImages]);
-  
-    function searchInformation(id: number) {
-      const result = images.find((image) => image.id === id);
-      return result ? [result] : [];
+    }, 300);
+  }, [selectedItem, products]);
+
+  // Dividir productos en filas
+  useEffect(() => {
+    if (filteredImages.length === 0) {
+      setRows([]);
+      return;
     }
-  
-    return (
-      <ProductsContext.Provider
-        value={{
-          selectedItem,
-          setSelectedItem,
-          filteredImages,
-          rows,
-          isTransitioning,
-          searchInformation,
-        }}
-      >
-        {children}
-      </ProductsContext.Provider>
-    );
-  };
-  
-  export const useProduct = () => {
-    const context = useContext(ProductsContext);
-    if (!context) {
-      throw new Error("useProduct must be used within a ProductsProvider");
+
+    let newRows = [
+      filteredImages.slice(0, Math.ceil(filteredImages.length / 2)),
+      filteredImages.slice(
+        Math.ceil(filteredImages.length / 2),
+        Math.ceil(filteredImages.length / 2) * 2
+      ),
+      filteredImages.slice(Math.ceil(filteredImages.length / 2) * 2),
+    ];
+
+    setRows(newRows);
+  }, [filteredImages]);
+
+  // Buscar producto por ID
+  async function searchProduct(id: number) {
+    const result = products.find((product) => product.id === id);
+    setSelectedProduct(result || null);
+  }
+
+  // Buscar imágenes del producto en Supabase
+  async function fetchProductPictures(id: number) {
+    const { data, error } = await supabase
+      .from("ProductPictures")
+      .select("id, idProduct, urlPicture")
+      .eq("idProduct", id);
+
+    if (error) {
+      console.error("Error fetching product pictures:", error);
+    } else {
+      setProductPictures(data);
     }
-    return context;
-  };
-  
+  }
+
+  // Función que llama a ambas
+  async function fetchProductData(id: number) {
+    await searchProduct(id);
+    await fetchProductPictures(id);
+  }
+
+  return (
+    <ProductsContext.Provider
+      value={{
+        selectedItem,
+        setSelectedItem,
+        filteredImages,
+        rows,
+        isTransitioning,
+        selectedProduct,
+        productPictures,
+        fetchProductData,
+      }}
+    >
+      {children}
+    </ProductsContext.Provider>
+  );
+};
+
+export const useProduct = () => {
+  const context = useContext(ProductsContext);
+  if (!context) {
+    throw new Error("useProduct must be used within a ProductsProvider");
+  }
+  return context;
+};

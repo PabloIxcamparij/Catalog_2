@@ -7,5 +7,11 @@ export type productType = {
     dimensions: string;
     description: string;
     recommendations: string;
-    src: string;
+    profilePicture: string;
+}
+
+export type productPictureType = {
+    id: number;
+    idProduct: number;
+    urlPicture: string;
 }

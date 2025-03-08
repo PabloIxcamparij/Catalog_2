@@ -1,39 +1,33 @@
 @import "tailwindcss";
 
+
+/* Invisible scroll */
 .scroll-hidden {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .scroll-hidden::-webkit-scrollbar {
-  display: none; /* Safari y Chrome */
+  display: none;
 }
 
 body {
   font-family: "Queensides", serif;
 }
 
-
+/*  Visible scroll */
 .stylish-scroll {
-  overflow: auto !important; /* Asegura que siempre haya scroll */
-  -webkit-overflow-scrolling: touch; /* Mejora la experiencia en iOS */
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch;
 }
 
-
-/* Personaliza la barra de desplazamiento en navegadores Webkit */
 .stylish-scroll::-webkit-scrollbar {
-  width: 10px;
   height: 8px;
+  width: 20px;
 }
 
-/* Estilo del "thumb" (la parte que se mueve) */
 .stylish-scroll::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.5);
-  border-radius: 20px;
   transition: background 0.3s ease-in-out;
-}
-
-/* Efecto hover para el "thumb" */
-.stylish-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
 }

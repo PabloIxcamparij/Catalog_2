@@ -4,7 +4,7 @@ export const BarMenu = () => {
   const { selectedItem, setSelectedItem } = useProduct();
 
   return (
-    <div className="ml-[4vh] sm:ml-[15vh] mb-5">
+    <div className="ml-[4vh] md:ml-[15vh] mb-5 text-wrap">
       
       <h1 className="text-3xl sm:text-5xl font-semibold">{selectedItem}</h1>{" "}
       
@@ -17,27 +17,21 @@ export const BarMenu = () => {
         </button>
         <button
           className="hover:underline"
-          onClick={() => setSelectedItem("Producto")}
+          onClick={() => setSelectedItem("Decoracion")}
         >
-          Productos
+          Decoracion
         </button>
         <button
           className="hover:underline"
-          onClick={() => setSelectedItem("Ventas")}
+          onClick={() => setSelectedItem("Maquillaje")}
         >
-          Ventas
+          Maquillaje
         </button>
         <button
           className="hover:underline"
-          onClick={() => setSelectedItem("Items")}
+          onClick={() => setSelectedItem("Higiene")}
         >
-          Items
-        </button>
-        <button
-          className="hover:underline"
-          onClick={() => setSelectedItem("Idont")}
-        >
-          Idont
+          Higiene
         </button>
       </div>
     </div>
