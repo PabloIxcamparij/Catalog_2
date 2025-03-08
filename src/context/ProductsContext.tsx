@@ -37,7 +37,7 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
     []
   );
 
-  // Obtener lista de productos desde Supabase
+  // Get List Products
   useEffect(() => {
     const fetchProducts = async () => {
       const { data, error } = await supabase
@@ -57,7 +57,7 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
     fetchProducts();
   }, []);
 
-  // Filtrar productos según categoría seleccionada
+  // FilteredI products acording category
   useEffect(() => {
     setIsTransitioning(true);
     setTimeout(() => {
@@ -70,7 +70,7 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
     }, 300);
   }, [selectedItem, products]);
 
-  // Dividir productos en filas
+  // Determine rows in indexPage
   useEffect(() => {
     if (filteredImages.length === 0) {
       setRows([]);
@@ -89,13 +89,19 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
     setRows(newRows);
   }, [filteredImages]);
 
-  // Buscar producto por ID
+  // Call fuction search
+  async function fetchProductData(id: number) {
+    await searchProduct(id);
+    await fetchProductPictures(id);
+  }
+
+  // Search product by ID
   async function searchProduct(id: number) {
     const result = products.find((product) => product.id === id);
     setSelectedProduct(result || null);
   }
 
-  // Buscar imágenes del producto en Supabase
+  // Search imgs of product
   async function fetchProductPictures(id: number) {
     const { data, error } = await supabase
       .from("ProductPictures")
@@ -107,12 +113,6 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
     } else {
       setProductPictures(data);
     }
-  }
-
-  // Función que llama a ambas
-  async function fetchProductData(id: number) {
-    await searchProduct(id);
-    await fetchProductPictures(id);
   }
 
   return (

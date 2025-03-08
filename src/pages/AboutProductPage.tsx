@@ -8,7 +8,7 @@ export default function AboutProductPage() {
 
   useEffect(() => {
     fetchProductData(parseInt(id));
-  }, [id]);
+  }, );
 
   if (!selectedProduct) {
     return <p className="text-center text-2xl">Producto no encontrado</p>;
@@ -16,6 +16,7 @@ export default function AboutProductPage() {
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center gap-5 sm:gap-0">
+      
       <div className="relative max-w-screen h-[60vh] lg:w-[50%] lg:h-[80vh] overflow-x-auto overflow-y-hidden flex snap-x snap-mandatory scroll-smooth p-3 stylish-scroll">
         {productPictures.map((image, index) => (
           <div
@@ -31,7 +32,7 @@ export default function AboutProductPage() {
         ))}
       </div>
 
-      <div className="md:mr-[8vh] w-[80%] lg:w-[50%] text-center p-2 mb-[3vh]">
+      <div className="md:ml-[8vh] md:mr-[8vh] lg:ml-0 w-[80%] lg:w-[50%] text-center p-2 mb-[3vh]">
         <h1 className="text-4xl sm:text-6xl font-bold">{selectedProduct.name}</h1>
 
         <div className="w-full border border-black my-4" />

@@ -9,7 +9,7 @@ export default function LayoutProduct() {
         <Header />
       </header>
 
-      <main className="md:ml-[13vh] flex flex-col items-center justify-center gap-5 flex-grow">
+      <main className="md:ml-[8vh] lg:ml-[13vh] flex flex-col items-center justify-center gap-5 flex-grow">
         <Outlet />
       </main>
     </div>

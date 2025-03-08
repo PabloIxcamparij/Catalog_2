@@ -29,5 +29,5 @@ body {
 .stylish-scroll::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.5);
   transition: background 0.3s ease-in-out;
-  border-radius: 20px;
+  box-shadow: inset 30px 0 0 rgba(230, 230, 230, 1), inset -30px 0 0 rgba(230, 230, 230, 1);
 }
