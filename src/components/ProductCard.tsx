@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 
-
 export default function ProductCard({ image }: any) {
   return (
     <motion.div
@@ -17,9 +16,8 @@ export default function ProductCard({ image }: any) {
         <motion.img
           src={image.profilePicture}
           alt={`Project ${image.id}`}
-          className="rounded-3xl w-[38vh] h-[38vh] object-cover transition-transform duration-500 ease-in-out transform hover:translate-x-8 hover:z-10 hover:relative"
+          className="w-[38vh] h-[38vh] object-cover transition-transform duration-300 ease-in-out transform hover:scale-110"
           layout
-          whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 150, damping: 10 }}
         />
       </NavLink>
