@@ -7,8 +7,10 @@ export default function IndexPage() {
 
   return (
     <div className="ml-[2vh] md:ml-[12vh] flex items-center justify-center">
+      
       <div
-        className="ml-[2.2vh] mr-[2.2vh] mb-[2vh] w-full h-[80vh] overflow-x-scroll overflow-y-hidden"
+        className="ml-[2.2vh] mr-[2.2vh] mb-[2vh] w-full h-[80vh]
+        overflow-x-scroll overflow-y-hidden"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         <div className="flex flex-col gap-4 ">

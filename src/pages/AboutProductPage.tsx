@@ -17,7 +17,10 @@ export default function AboutProductPage() {
   return (
     <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center gap-5 sm:gap-0">
       
-      <div className="relative max-w-screen h-[60vh] lg:w-[50%] lg:h-[80vh] overflow-x-auto overflow-y-hidden flex snap-x snap-mandatory scroll-smooth p-3 stylish-scroll">
+      <div className="relative max-w-screen h-[60vh] lg:w-[50%] lg:h-[80vh]
+      overflow-x-auto overflow-y-hidden flex snap-x snap-mandatory p-3"
+      style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
         {productPictures.map((image, index) => (
           <div
             key={index}
