@@ -15,7 +15,7 @@ export default function AboutProductPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center gap-5 sm:gap-0">
+    <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center sm:gap-0">
       
       <div className="relative max-w-screen h-[60vh] lg:w-[50%] lg:h-[80vh]
       overflow-x-auto overflow-y-hidden flex snap-x snap-mandatory p-3"
@@ -29,13 +29,13 @@ export default function AboutProductPage() {
             <img
               src={image.urlPicture}
               alt={selectedProduct.name}
-              className="rounded-lg w-[80%] h-full object-cover shadow-lg"
+              className="bg-black p-2 rounded-4xl w-[80%] h-full object-cover shadow-lg"
             />
           </div>
         ))}
       </div>
 
-      <div className="md:ml-[8vh] md:mr-[8vh] lg:ml-0 w-[80%] lg:w-[50%] text-center p-2 mb-[3vh]">
+      <div className="text-center md:ml-[8vh] md:mr-[4vh] lg:ml-0 w-[80%] lg:w-[50%] mb-[3vh]">
         <h1 className="text-4xl sm:text-6xl font-bold">{selectedProduct.name}</h1>
 
         <div className="w-full border border-black my-4" />
