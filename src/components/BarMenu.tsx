@@ -23,9 +23,9 @@ export const BarMenu = () => {
         </button>
         <button
           className="hover:underline"
-          onClick={() => setSelectedItem("Maquillaje")}
+          onClick={() => setSelectedItem("Estetica")}
         >
-          Maquillaje
+          Estetica
         </button>
         <button
           className="hover:underline"

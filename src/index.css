@@ -14,3 +14,29 @@
 body {
   font-family: "Queensides", serif;
 }
+
+/* 🔹 Ocultar el cursor del sistema */
+* {
+  cursor: none;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  transform: translate(-50%, -50%); /* Centrar el cursor */
+  transition: transform 0.05s linear;
+  z-index: 10000;
+  opacity: 1;
+}
+
+/* 🔹 Agrandar el cursor cuando pase sobre un enlace */
+.custom-cursor--link {
+  transform: translate(-50%, -50%) scale(1.5);
+}
