@@ -3,8 +3,19 @@ import { useEffect, useState } from "react";
 export default function Cursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHoveringLink, setIsHoveringLink] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
 
   useEffect(() => {
+    // Detectar si el usuario está en un dispositivo táctil
+    const checkIfDesktop = () => {
+      setIsDesktop(!window.matchMedia("(pointer: coarse)").matches);
+    };
+
+    checkIfDesktop(); // Verificar al cargar la página
+    window.addEventListener("resize", checkIfDesktop); // Verificar en cambios de tamaño de pantalla
+
+    if (!isDesktop) return; // Si no es un dispositivo de escritorio, salir
+
     const handleMouseMove = (event: MouseEvent) => {
       setPosition({ x: event.clientX, y: event.clientY });
     };
@@ -14,7 +25,6 @@ export default function Cursor() {
 
     document.addEventListener("mousemove", handleMouseMove);
 
-    // Manejar los eventos de hover en los links
     const links = document.querySelectorAll("a");
     links.forEach((link) => {
       link.addEventListener("mouseover", handleMouseOver);
@@ -27,8 +37,11 @@ export default function Cursor() {
         link.removeEventListener("mouseover", handleMouseOver);
         link.removeEventListener("mouseout", handleMouseOut);
       });
+      window.removeEventListener("resize", checkIfDesktop);
     };
-  }, []);
+  }, [isDesktop]); // Se ejecuta nuevamente si cambia `isDesktop`
+
+  if (!isDesktop) return null; // No renderizar el cursor en dispositivos táctiles
 
   return (
     <div

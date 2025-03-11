@@ -27,13 +27,11 @@ export default function AboutProductPage() {
   }, []);
 
   if (!selectedProduct || productPictures.length === 0) {
-    return <p className="text-center text-2xl">Producto no encontrado</p>;
+    return <p className="text-center text-2xl">Buscando producto</p>;
   }
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center sm:gap-0">
-      
-      
       
       <div className="relative max-w-screen h-[60vh] lg:w-[50%] lg:h-[80vh] overflow-x-auto overflow-y-hidden flex snap-x snap-mandatory p-2"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
