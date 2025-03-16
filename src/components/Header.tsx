@@ -8,13 +8,13 @@ export default function Header() {
   return (
     <nav
       className={`
-        flex justify-between items-center w-full h-[80%] p-5
+        flex justify-between items-center w-full h-[80%] p-8
         ${isHome ? "flex-col" : "md:flex-col"}
     `}
     >
       <NavLink
         to={"/"}
-        className="flex w-[40%] h-[40%] items-center justify-center transition-transform duration-300 ease-in-out transform hover:text-black/50"
+        className="flex w-[50%] h-[40%] items-center justify-center transition-transform duration-300 ease-in-out transform hover:text-black/50"
       >
         <h1
           className={`flex items-center gap-8 text-2xl font-semibold whitespace-nowrap
@@ -25,6 +25,7 @@ export default function Header() {
         >
           <LeafIcon />
           Arbol de vida
+
         </h1>
       </NavLink>
 

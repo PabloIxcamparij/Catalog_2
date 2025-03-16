@@ -33,7 +33,7 @@ export default function AboutProductPage() {
   return (
     <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center sm:gap-0">
 
-      <div className="text-center md:ml-[12vh] w-[80%] lg:w-[50%] mb-[4vh] mt-[4vh]">
+      <div className="text-center md:ml-[5vh] lg:ml-[12vh] w-[80%] lg:w-[50%] mb-[4vh] mt-[4vh]">
         
         <h1 className="text-4xl sm:text-6xl font-bold">{selectedProduct.name}</h1>
         <div className="w-full border border-black my-4" />
@@ -47,7 +47,7 @@ export default function AboutProductPage() {
       </div>
 
             
-      <div className="mb-8 md:ml-[7vh] relative max-w-screen h-[60vh] lg:w-[50%] lg:h-[80vh] overflow-x-auto overflow-y-hidden flex snap-x snap-mandatory p-2"
+      <div className="mb-8 md:ml-[5vh] lg:ml-0 relative max-w-screen h-[60vh] lg:w-[50%] lg:h-[80vh] overflow-x-auto overflow-y-hidden flex snap-x snap-mandatory p-2"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {loadingCarousel ? (

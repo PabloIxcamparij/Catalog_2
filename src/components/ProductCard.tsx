@@ -11,7 +11,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <NavLink to={`/about/${product.id}`}>
         <img
           src={product.profilePicture}
-          className="object-cover w-full h-[75%] rounded-2xl transition-transform duration-300 ease-in-out transform hover:scale-95"
+          className="object-cover w-full h-[85%] rounded-2xl transition-transform duration-300 ease-in-out transform hover:scale-95"
         />
         <div className="mt-5">
           <h1 className="text-xl font-semibold"> {product.name}</h1>
