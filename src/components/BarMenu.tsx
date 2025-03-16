@@ -4,7 +4,7 @@ export const BarMenu = () => {
   const { selectedItem, setSelectedItem } = useProduct();
 
   return (
-    <div className="ml-[4vh] md:ml-[15vh] mb-5 text-wrap">
+    <div className="ml-[4vh] md:ml-[10vh] lg:ml-[14vh] mb-5 md:mb-10 text-wrap">
       
       <h1 className="text-3xl sm:text-5xl font-semibold">{selectedItem}</h1>{" "}
       

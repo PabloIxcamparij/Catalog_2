@@ -12,7 +12,6 @@ type ProductsContextType = {
   selectedItem: string;
   setSelectedItem: (item: string) => void;
   filteredImages: productType[];
-  rows: productType[][];
   isTransitioning: boolean;
   selectedProduct: productType | null;
   productPictures: productPictureType[];
@@ -26,7 +25,6 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<productType[]>([]);
   const [filteredImages, setFilteredImages] = useState<productType[]>([]);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [rows, setRows] = useState<productType[][]>([]);
   const [selectedProduct, setSelectedProduct] = useState<productType | null>(null);
   const [productPictures, setProductPictures] = useState<productPictureType[]>([]);
 
@@ -60,25 +58,6 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
       setIsTransitioning(false);
     }, 300);
   }, [selectedItem, products]);
-
-  // Determine rows in indexPage
-  useEffect(() => {
-    if (filteredImages.length === 0) {
-      setRows([]);
-      return;
-    }
-
-    let newRows = [
-      filteredImages.slice(0, Math.ceil(filteredImages.length / 2)),
-      filteredImages.slice(
-        Math.ceil(filteredImages.length / 2),
-        Math.ceil(filteredImages.length / 2) * 2
-      ),
-      filteredImages.slice(Math.ceil(filteredImages.length / 2) * 2),
-    ];
-
-    setRows(newRows);
-  }, [filteredImages]);
 
   // Function to fetch product data
   async function fetchProductData(id: number) {
@@ -119,7 +98,6 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
         selectedItem,
         setSelectedItem,
         filteredImages,
-        rows,
         isTransitioning,
         selectedProduct,
         productPictures,

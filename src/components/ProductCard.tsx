@@ -1,26 +1,23 @@
-import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
+import { productType } from "../types";
 
-export default function ProductCard({ image }: any) {
+interface ProductCardProps {
+  product: productType;
+}
+
+export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.8 }}
-      transition={{ type: "spring", stiffness: 120, damping: 15 }}
-      key={image.id}
-      className="flex-shrink-0"
-    >
-      <NavLink to={`/about/${image.id}`}>
-        <motion.img
-          src={image.profilePicture}
-          alt={`Project ${image.id}`}
-          className="w-[38vh] h-[38vh] object-cover transition-transform duration-300 ease-in-out transform hover:scale-110"
-          layout
-          transition={{ type: "spring", stiffness: 150, damping: 10 }}
+    <div className="w-[45vh] h-full flex-shrink-0 bg-white/70 p-4 rounded-4xl">
+      <NavLink to={`/about/${product.id}`}>
+        <img
+          src={product.profilePicture}
+          className="object-cover w-full h-[75%] rounded-2xl transition-transform duration-300 ease-in-out transform hover:scale-95"
         />
+        <div className="mt-5">
+          <h1 className="text-xl font-semibold"> {product.name}</h1>
+          <h1 className="text-gray-800"> {product.purpose} </h1>
+        </div>
       </NavLink>
-    </motion.div>
+    </div>
   );
 }

@@ -1,37 +1,44 @@
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useMotionValue,
+  useMotionValueEvent,
+  animate,
+} from "motion/react";
+import { useRef } from "react";
 import { useProduct } from "../context/ProductsContext";
 import ProductCard from "../components/ProductCard";
 
-export default function IndexPage() {
-  const { rows, isTransitioning } = useProduct();
+export default function ScrollBlurEffect() {
+  const ref = useRef(null);
+  const { scrollXProgress } = useScroll({ container: ref });
+  const maskImage = useBlurEffect(scrollXProgress);
+  const { filteredImages } = useProduct();
 
   return (
-    <div className="ml-[2vh] md:ml-[12vh] flex items-center justify-center">
-      
-      <div
-        className="ml-[2.2vh] mr-[2.2vh] mb-[2vh] w-full h-[80vh]
-        overflow-x-scroll overflow-y-hidden"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+    <div className="w-full md:max-w-[88%]">
+      <motion.ul
+        ref={ref}
+        style={{ maskImage, scrollbarWidth: "none" }}
+        className="flex gap-5 p-5 overflow-x-auto scrollbar-hide h-[80vh]"
       >
-        <div className="flex flex-col gap-4 ">
-          {!isTransitioning &&
-            rows.map((row, rowIndex) => (
-
-              <motion.div 
-              layout 
-              key={rowIndex} 
-              className="flex gap-4"
-              transition={{ type: "spring", stiffness: 100, damping: 20 }}
-              >                
-                <AnimatePresence>
-                  {row.map((image, index) => (
-                    <ProductCard image={image} key={index} />
-                  ))}
-                </AnimatePresence>
-              </motion.div>
-            ))}
-        </div>
-      </div>
+        {filteredImages.map((product, index) => (
+          <ProductCard product={product} key={index} />
+        ))}
+      </motion.ul>
     </div>
   );
+}
+
+function useBlurEffect(scrollXProgress : any) {
+  const maskImage = useMotionValue(
+    "linear-gradient(90deg, #0000, #000 5%, #000 95%, #0000)"
+  );
+
+  useMotionValueEvent(scrollXProgress, "change", (value) => {
+    const mid = "linear-gradient(90deg, #0000, #000 5%, #000 95%, #0000)";
+    animate(maskImage, value === 0 ? mid : value === 1 ? mid : mid);
+  });
+
+  return maskImage;
 }

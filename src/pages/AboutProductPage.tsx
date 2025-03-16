@@ -32,8 +32,22 @@ export default function AboutProductPage() {
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center sm:gap-0">
-      
-      <div className="relative max-w-screen h-[60vh] lg:w-[50%] lg:h-[80vh] overflow-x-auto overflow-y-hidden flex snap-x snap-mandatory p-2"
+
+      <div className="text-center md:ml-[12vh] w-[80%] lg:w-[50%] mb-[4vh] mt-[4vh]">
+        
+        <h1 className="text-4xl sm:text-6xl font-bold">{selectedProduct.name}</h1>
+        <div className="w-full border border-black my-4" />
+        <div className="flex flex-col w-full md:grid grid-cols-1 md:grid-cols-2 gap-5 text-lg sm:text-2xl text-left">
+          <p><strong>Categoría:</strong> {selectedProduct.category}</p>
+          <p><strong>Dimensiones:</strong> {selectedProduct.dimensions}</p>
+          <p><strong>Material:</strong> {selectedProduct.material}</p>
+          <p className="col-span-2"><strong>Descripción:</strong> {selectedProduct.description}</p>
+          <p className="col-span-2"><strong>Recomendaciones:</strong> {selectedProduct.recommendations}</p>
+        </div>
+      </div>
+
+            
+      <div className="mb-8 md:ml-[7vh] relative max-w-screen h-[60vh] lg:w-[50%] lg:h-[80vh] overflow-x-auto overflow-y-hidden flex snap-x snap-mandatory p-2"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {loadingCarousel ? (
@@ -58,18 +72,6 @@ export default function AboutProductPage() {
             </div>
           ))
         )}
-      </div>
-
-      <div className="text-center md:ml-[8vh] md:mr-[4vh] lg:ml-0 w-[80%] lg:w-[50%] mb-[3vh]">
-        <h1 className="text-4xl sm:text-6xl font-bold">{selectedProduct.name}</h1>
-        <div className="w-full border border-black my-4" />
-        <div className="flex flex-col w-full md:grid grid-cols-1 md:grid-cols-2 gap-5 text-lg sm:text-2xl text-left">
-          <p><strong>Categoría:</strong> {selectedProduct.category}</p>
-          <p><strong>Dimensiones:</strong> {selectedProduct.dimensions}</p>
-          <p><strong>Material:</strong> {selectedProduct.material}</p>
-          <p className="col-span-2"><strong>Descripción:</strong> {selectedProduct.description}</p>
-          <p className="col-span-2"><strong>Recomendaciones:</strong> {selectedProduct.recommendations}</p>
-        </div>
       </div>
 
       <style>
